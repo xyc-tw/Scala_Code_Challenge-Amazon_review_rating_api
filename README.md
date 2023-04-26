@@ -1,12 +1,12 @@
 <!-- PROJECT Title -->
 <br />
 <div align="center">
-  <div>
-    <img src="images/scala.png" alt="Logo" height="80" style="margin-right: 80px;">
-    <img src="images/spark.png" alt="Logo" height="80">
-  </div>
   <h3>Scala Coding Challenge - Amazon review Rating API</h3>
   <p>From <a href="https://github.com/HivemindTechnologies/scala-coding-challenge">https://github.com/HivemindTechnologies/scala-coding-challenge</a></p>
+  <div>
+    <img src="images/scala.png" alt="Logo" height="80" style="margin-right: 80px; padding-right: 80px">
+    <img src="images/spark.png" alt="Logo" height="80">
+  </div>
 </div>
 <!-- TABLE OF CONTENTS -->
 <details>
