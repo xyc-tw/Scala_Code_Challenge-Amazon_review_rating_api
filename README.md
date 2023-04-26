@@ -4,8 +4,10 @@
   <h3>Scala Coding Challenge</h3>
   <h3>Amazon review Rating API</h3>
   From <a href="https://github.com/HivemindTechnologies/scala-coding-challenge">https://github.com/HivemindTechnologies/scala-coding-challenge</a>
-  <img src="images/scala.png" alt="Logo" height="80">
-  <img src="images/spark.png" alt="Logo" height="80">
+  <div>
+    <img src="images/scala.png" alt="Logo" height="80">
+    <img src="images/spark.png" alt="Logo" height="80">
+  </div>
 </div>
 
 <!-- TABLE OF CONTENTS -->
@@ -28,9 +30,6 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
-
 Tis project is based on the <a href="https://github.com/HivemindTechnologies/scala-coding-challenge">this repo</a> but using ***GET request***.
 
 An API, which takes the request from client, and returns the ***best reviewed product and average rating*** according to the requirements, which contain ***time period, minimal reviews and amount of products***.
@@ -53,9 +52,9 @@ The IntelliJ IDE is used in this project.
 ### Installation
 1. Download these 3 files: ***ApiServer.scala, build.sbt and test.json***
 2. Open a new scala project in IntelliJ
-![new-project, new project][new-project]
+![new-project, new project][new-project]{height=400}
 3. Put the downloaded files to the right location
-![project-structure, project-structure][project-structure] 
+![project-structure, project-structure][project-structure]{height=200}
 4. Use terminal to start Http-Server 
 ```sh
 sbt compile
@@ -74,8 +73,10 @@ sbt "run data/test.json"
   }'
 ```
 6. Get the result
+```sh
 [{"asin":"B000JQ0JNS","average_rating":4.5},
 {"asin":"B000NI7RW8","average_rating":3.6666666666666665}]
+```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -83,8 +84,6 @@ sbt "run data/test.json"
 ## Contact
 
 Hsinyu Chen - [@linkedIn](https://www.linkedin.com/in/hsinyu-chen-4b43b489/) - [@email](chenxinyu.tw@gmail.com)
-
-Project Link: [@github](https://github.com/xyc-tw/horror-manga-style-transfer) - [@Render](https://horror-manga-style-transfer.onrender.com/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
