@@ -2,13 +2,11 @@
 <br />
 <div align="center">
   <div>
-    <img src="images/scala.png" alt="Logo" height="80">
-    <p>          </p>
+    <img src="images/scala.png" alt="Logo" height="80" style="margin-right: 10px;">
     <img src="images/spark.png" alt="Logo" height="80">
   </div>
-  <h2>Scala Coding Challenge</h2>
-  <h3>Amazon review Rating API</h3>
-  From <a href="https://github.com/HivemindTechnologies/scala-coding-challenge">https://github.com/HivemindTechnologies/scala-coding-challenge</a>
+  <h3>Scala Coding Challenge - Amazon review Rating API</h3>
+  <p>From <a href="https://github.com/HivemindTechnologies/scala-coding-challenge">https://github.com/HivemindTechnologies/scala-coding-challenge</a></p>
 </div>
 <!-- TABLE OF CONTENTS -->
 <details>
@@ -52,10 +50,10 @@ The IntelliJ IDE is used in this project.
 ### Installation
 1. Download these 3 files: ***ApiServer.scala, build.sbt and test.json***
 2. Open a new scala project in IntelliJ
-<img src="images/new-project.jpeg" alt="new-project" width="400"/>
+<img src="images/new-project.jpeg" alt="new-project" width="600"/>
 
 3. Put the downloaded files to the right location
-<img src="images/project-structure.jpeg" alt="project-structure" width="200"/>
+<img src="images/project-structure.jpeg" alt="project-structure" width="400"/>
 4. Use terminal to start Http-Server 
 ```sh
 sbt compile
