@@ -2,7 +2,7 @@
 <br />
 <div align="center">
   <div>
-    <img src="images/scala.png" alt="Logo" height="80" style="margin-right: 10px;">
+    <img src="images/scala.png" alt="Logo" height="80" style="margin-right: 80px;">
     <img src="images/spark.png" alt="Logo" height="80">
   </div>
   <h3>Scala Coding Challenge - Amazon review Rating API</h3>
@@ -54,6 +54,7 @@ The IntelliJ IDE is used in this project.
 
 3. Put the downloaded files to the right location
 <img src="images/project-structure.jpeg" alt="project-structure" width="400"/>
+
 4. Use terminal to start Http-Server 
 ```sh
 sbt compile
