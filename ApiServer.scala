@@ -11,8 +11,9 @@ import org.apache.spark.sql.functions._
 import org.apache.log4j.{Level, Logger}
 
 // Libraries for json
-import io.circe.Decoder
+import io.circe.{Decoder, Json}
 import io.circe.parser.decode
+import io.circe.parser.parse
 import io.circe.generic.semiauto._
 
 object ApiServer {
@@ -51,7 +52,7 @@ object ApiServer {
     val resultJson = resultDf.select(col("asin"), col("average_rating"))
       .toJSON.collect().mkString("[", ",", "]") //DataFrame -> RDD[String] -> Array[String] -> String
 
-    resultJson
+    parse(resultJson).getOrElse(Json.Null).spaces2
   }
 
   def main(args: Array[String]) {

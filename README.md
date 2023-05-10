@@ -74,8 +74,16 @@ sbt "run data/test.json"
 ```
 6. Get the result
 ```sh
-[{"asin":"B000JQ0JNS","average_rating":4.5},
-{"asin":"B000NI7RW8","average_rating":3.6666666666666665}]
+[
+  {
+    "asin" : "B000JQ0JNS",
+    "average_rating" : 4.5
+  },
+  {
+    "asin" : "B000NI7RW8",
+    "average_rating" : 3.6666666666666665
+  }
+]
 ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
