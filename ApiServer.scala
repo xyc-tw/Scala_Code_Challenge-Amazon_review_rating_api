@@ -8,14 +8,19 @@ import org.apache.spark.sql.{Dataset, SparkSession}
 import org.apache.spark.sql.functions.col
 import org.apache.spark.sql.functions._
 
+import org.apache.log4j.{Level, Logger}
+
 // Libraries for json
-import io.circe.{ Decoder, Json }
+import io.circe.Decoder
 import io.circe.parser.decode
 import io.circe.generic.semiauto._
 
 object ApiServer {
 
-  case class Review(asin: String, helpful: Array[Long], overall: Double, reviewText: String, reviewerID: String, reviewerName: String, summary: String, unixReviewTime: Long)
+  // Set the log level to WARN to reduce output
+  Logger.getRootLogger.setLevel(Level.WARN)
+
+  private case class Review(asin: String, helpful: Array[Long], overall: Double, reviewText: String, reviewerID: String, reviewerName: String, summary: String, unixReviewTime: Long)
 
   /** Transfer the input StringTime to UnixTime */
   private def stringToUnixTime(pos: String, stringTime: String): Long = {
@@ -28,21 +33,21 @@ object ApiServer {
   /** Filter data according to the request */
   private def filter_data(ds: Dataset[Review], start: String, end: String, limit: Int, min_number_reviews: Int): String = {
 
-    /**  Step 1: filter time */
+    //  Step 1: filter time
     val timeFiltered = ds.filter(review => review.unixReviewTime >= stringToUnixTime("start", start)
       && review.unixReviewTime < stringToUnixTime("end", end))
 
-    /**  Step 2: group by review id and count the average */
+    //  Step 2: group by review id and count the average
     val asinGrouped = timeFiltered.groupBy("asin")
       .agg(count("asin").as("count"), avg("overall").as("average_rating"))
 
-    /**  Step 3: filter min_number_reviews */
+    //  Step 3: filter min_number_reviews
     val minFiltered = asinGrouped.filter(col("count") >= min_number_reviews)
 
-    /**  Step 4: sort according to average_rating, and only limit data as required*/
+    //  Step 4: sort according to average_rating, and only limit data as required
     val resultDf = minFiltered.orderBy(col("average_rating").desc, col("count").desc).limit(limit)
 
-    /**  Step 5: convert result dataset to JSON */
+    //  Step 5: convert result dataset to JSON
     val resultJson = resultDf.select(col("asin"), col("average_rating"))
       .toJSON.collect().mkString("[", ",", "]") //DataFrame -> RDD[String] -> Array[String] -> String
 
@@ -50,32 +55,31 @@ object ApiServer {
   }
 
   def main(args: Array[String]) {
-    /** set file path as argument */
+    // set file path as argument
     if (args.length < 1) {
       println("Please provide the path to the JSON file as the first argument.")
       sys.exit(1)
     }
     val path = args(0)
 
-    /** Create a SparkSession */
+    // Create a SparkSession
     val spark = SparkSession
       .builder()
       .master("local[*]")
       .appName("JSON to Dataset")
       .getOrCreate()
 
-    /** read the JSON file and create a DataSet */
+    // read the JSON file and create a DataSet
     import spark.implicits._
     val reviewDs = spark.read
       .json(path)
       .as[Review]
 
-    /** set HttpHandler */
+    // set HttpHandler for server
     object GetViewsHandler extends HttpHandler {
 
       case class RequestBody(start: String, end: String, limit: Int, min_number_reviews: Int)
       implicit val decoder: Decoder[RequestBody] = deriveDecoder[RequestBody]
-
 
       def handle(exchange: HttpExchange) {
         val requestMethod = exchange.getRequestMethod.toUpperCase()
@@ -109,7 +113,7 @@ object ApiServer {
       }
     }
 
-    /** create and run Server */
+    // create and run Server
     val server = HttpServer.create(new InetSocketAddress(8080), 0)
     server.createContext("/", GetViewsHandler)
     server.setExecutor(null)
